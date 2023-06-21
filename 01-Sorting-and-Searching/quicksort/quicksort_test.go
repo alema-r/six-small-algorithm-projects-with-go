@@ -49,3 +49,37 @@ func TestPartition(t *testing.T) {
 		})
 	}
 }
+
+func TestQuicksort(t *testing.T) {
+	type testCase struct {
+		initial, expected []int
+	}
+
+	tt := map[string]testCase{
+		"array with one element": {
+			initial:  []int{0},
+			expected: []int{0},
+		},
+		"array sorted": {
+			initial:  []int{0, 1, 1, 2, 4},
+			expected: []int{0, 1, 1, 2, 4},
+		},
+		"array not sorted": {
+			initial:  []int{4, 1, 0, 2, 5, 7},
+			expected: []int{0, 1, 2, 4, 5, 7},
+		},
+	}
+
+	for name, tc := range tt {
+		t.Run(name, func(t *testing.T) {
+			arr := tc.initial
+			Quicksort(arr)
+			for i := range arr {
+				if arr[i] != tc.expected[i] {
+					t.Errorf("the array is not sorted, expected %q, got %q", tc.expected, arr)
+					break
+				}
+			}
+		})
+	}
+}
