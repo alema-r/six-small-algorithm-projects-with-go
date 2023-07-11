@@ -94,3 +94,18 @@ func isSortedCustomer(arr []Customer) bool {
 	}
 	return true
 }
+
+// ArraySearchLoop
+func ArraySearchLoop(arr []int, search_func func([]int, int) (int, int)) {
+	for {
+		var target int
+		fmt.Printf("Target: ")
+		fmt.Scanln(&target)
+		index, numTests := search_func(arr, target)
+		if index != -1 {
+			fmt.Printf("array[%d] = %d, %d tests\n", index, target, numTests)
+		} else {
+			fmt.Printf("Target %d not found, %d tests\n", target, numTests)
+		}
+	}
+}

@@ -5,6 +5,7 @@ import (
 	"math/rand"
 	"time"
 
+	"github.com/alema-r/six-small-algorithm-projects-with-go/01-Sorting-and-Searching/binarysearch"
 	"github.com/alema-r/six-small-algorithm-projects-with-go/01-Sorting-and-Searching/bubblesort"
 	"github.com/alema-r/six-small-algorithm-projects-with-go/01-Sorting-and-Searching/countingsort"
 	"github.com/alema-r/six-small-algorithm-projects-with-go/01-Sorting-and-Searching/linearsearch"
@@ -65,18 +66,16 @@ func main() {
 		}
 
 	} else {
-		var target int
+		fmt.Printf("Algorithm (0: linear search, 1: binary search): ")
+		fmt.Scanln(&alg)
 		arr := utils.MakeRandomArray(numItems, max)
-		utils.PrintArray(arr, numItems)
-		for {
-			fmt.Printf("Target: ")
-			fmt.Scanln(&target)
-			index, numTests := linearsearch.LinearSearch(arr, target)
-			if index != -1 {
-				fmt.Printf("array[%d] = %d, %d tests\n", index, target, numTests)
-			} else {
-				fmt.Printf("Target %d not found, %d tests\n", target, numTests)
-			}
+		if alg == 1 {
+			quicksort.Quicksort(arr)
+			utils.PrintArray(arr, numItems)
+			utils.ArraySearchLoop(arr, binarysearch.BinarySearch)
+		} else {
+			utils.PrintArray(arr, numItems)
+			utils.ArraySearchLoop(arr, linearsearch.LinearSearch)
 		}
 
 	}
